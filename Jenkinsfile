@@ -14,7 +14,7 @@ pipeline {
 
     stage('project-build') {
       agent {
-        label 'master'
+        label 'trunk'
       }
       steps {
         awsCodeBuild(

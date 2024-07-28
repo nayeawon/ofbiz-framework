@@ -5,9 +5,8 @@ pipeline {
   stages {
     stage('project-clone'){
         git (
-            branch: "master“,
-            credentialsId: "${codeCommitCredentialsId}",
-            url: "https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/demo"
+            branch: "trunk",
+            url: "https://github.com/nayeawon/ofbiz-framework"
         )
     }
 

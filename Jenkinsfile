@@ -13,9 +13,6 @@ pipeline {
     }
 
     stage('project-build') {
-      agent {
-        label 'master'
-      }
       steps {
         withAWS(credentials: 'aws-credentials') {
           awsCodeBuild(

@@ -4,10 +4,12 @@ pipeline {
 
   stages {
     stage('project-clone'){
-        git (
-            branch: "trunk",
-            url: "https://github.com/nayeawon/ofbiz-framework"
-        )
+        steps {
+            git (
+                branch: "trunk",
+                url: "https://github.com/nayeawon/ofbiz-framework"
+            )
+        }
     }
 
     stage('project-build') {

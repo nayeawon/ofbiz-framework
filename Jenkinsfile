@@ -13,9 +13,6 @@ pipeline {
     }
 
     stage('project-build') {
-      agent {
-        label 'trunk'
-      }
       steps {
         awsCodeBuild(
           credentialsType: 'keys',

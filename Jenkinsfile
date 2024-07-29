@@ -14,18 +14,14 @@ pipeline {
 
     stage('project-build') {
       steps {
-        withAWS(credentials: 'aws-credentials') {
-          awsCodeBuild(
+        awsCodeBuild(
             credentialsType: 'jenkins',
-            credentialsId: 'cb-credential',
+            credentialsId: '797ce515-f9f8-4c25-a35b-cea16242feed',
             projectName: 'nyw-mod-cb',
             region: 'ap-northeast-1',
             sourceControlType: 'jenkins',
             sseAlgorithm: 'AES256'
-            // buildspec 위치 없어도 되는지 확인
         )
-        }
-        
       }
     }
   }

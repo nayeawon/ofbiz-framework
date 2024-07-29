@@ -16,7 +16,8 @@ pipeline {
       steps {
         withAWS(credentials: 'aws-credentials') {
           awsCodeBuild(
-            credentialsType: 'keys',
+            credentialsType: 'jenkins',
+            credentialsId: 'cb-credential',
             projectName: 'nyw-mod-cb',
             region: 'ap-northeast-1',
             sourceControlType: 'jenkins',

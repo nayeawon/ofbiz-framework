@@ -12,7 +12,7 @@ pipeline {
         }
     }
 
-    stage('project-build') {
+    stage('Build with CodeBuild') {
       steps {
         awsCodeBuild(
             credentialsType: 'jenkins',
@@ -24,5 +24,27 @@ pipeline {
         )
       }
     }
+
+    stage('Deploy with CodeDeploy') {
+            steps {
+                withAWS(credentials: 'codebuild') {
+                    script {
+                        def deployCommand = "aws deploy create-deployment " +
+                            "--application-name nyw-mod-cd " +
+                            "--deployment-config-name CodeDeployDefault.ECSAllAtOnce " +
+                            "--deployment-group-name nyw-mod-cd-dg " +
+                            "--s3-location bucket=nyw-mod-s3/nyw-mod-cb/"
+                        sh deployCommand
+                    }
+                }
+            }
+            post {
+                success {
+                    echo 'Deploy with CodeDeploy stage succeeded'
+                }
+                failure {
+                    echo 'Deploy with CodeDeploy stage failed'
+                }
+            }
   }
 }
